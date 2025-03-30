@@ -1,0 +1,4 @@
+psycopg2
+presidio-analyzer==2.2.358 --only-binary :all:
+presidio-anonymizer --only-binary :all:
+faker
