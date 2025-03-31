@@ -117,6 +117,15 @@ def log_person_data():
     logger.info(f"UK format: +44 {fake.numerify(text='20 #### ####')}")
     logger.info(f"German format: +49 {fake.numerify(text='### #######')}")
 
+    # Long messages with embedded PII
+    logger.info(
+        f"Customer {fake.first_name()} {fake.last_name()} placed an order for a new laptop to be shipped to {fake.address()}.")
+    logger.info(f"System alert: Unusual activity detected for user {fake.email()} with associated SSN {fake.ssn()}.")
+    logger.info(
+        f"Job application received from {fake.first_name()} {fake.last_name()} (email: {fake.email()}, phone: {fake.phone_number()}).")
+    logger.info(
+        f"Financial transaction alert: Account {fake.numerify(text='######')} linked to {fake.first_name()} {fake.last_name()} completed a transfer of $5000.")
+
     cur.close()
     conn.close()
 
