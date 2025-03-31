@@ -126,6 +126,16 @@ def log_person_data():
     logger.info(
         f"Financial transaction alert: Account {fake.numerify(text='######')} linked to {fake.first_name()} {fake.last_name()} completed a transfer of $5000.")
 
+    # Logging PII in different languages
+    logger.info("Русский: Имя: Иван Иванов, Email: ivan@example.com, Телефон: +7 495 123-45-67")
+    logger.info("Español: Nombre: Juan Pérez, Email: juan.perez@ejemplo.com, Teléfono: +34 600 123 456")
+    logger.info("עברית: שם: דני לוי, אימייל: dani@example.co.il, טלפון: 050-123-4567")
+    logger.info("中文: 姓名: 王伟, 电子邮件: wang.wei@example.cn, 电话: +86 138 1234 5678")
+    logger.info("Latviešu: Vārds: Jānis Bērziņš, E-pasts: janis@example.lv, Telefons: +371 29123456")
+    logger.info("العربية: الاسم: أحمد محمد, البريد الإلكتروني: ahmed@example.ae, الهاتف: +971 50 123 4567")
+    logger.info("日本語: 名前: 佐藤 健, メール: sato@example.jp, 電話: +81 90-1234-5678")
+
+
     cur.close()
     conn.close()
 
