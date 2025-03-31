@@ -1,8 +1,7 @@
 import logging
 import psycopg2
-from presidio_analyzer import AnalyzerEngine
-from presidio_anonymizer import AnonymizerEngine
 from faker import Faker
+from pii_logger import logger  # Import global logger
 
 # Database connection settings
 DB_CONFIG = {
@@ -12,38 +11,6 @@ DB_CONFIG = {
     "host": "localhost",
     "port": "5432"
 }
-
-# Initialize PII detection engines
-analyzer = AnalyzerEngine()
-anonymizer = AnonymizerEngine()
-
-# Configure logging
-logging.basicConfig(
-    filename="app.log",
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
-
-
-# PII redactor function
-def pii_redactor(record):
-    """Detects and redacts PII in log messages."""
-    results = analyzer.analyze(text=record.getMessage(), entities=["EMAIL_ADDRESS", "PHONE_NUMBER", "PERSON", "US_SSN"],
-                               language='en')
-    if results:
-        record.msg = anonymizer.anonymize(text=record.getMessage(), analyzer_results=results).text
-    return True
-
-
-class PiiFilter(logging.Filter):
-    def filter(self, record):
-        return pii_redactor(record)
-
-
-logger = logging.getLogger("PII_Logger")
-handler = logging.FileHandler("app.log")
-handler.addFilter(PiiFilter())
-logger.addHandler(handler)
 
 fake = Faker()
 
