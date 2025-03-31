@@ -102,6 +102,13 @@ def log_person_data():
     logger.info(f"Uppercase Name: {fake.first_name().upper()} {fake.last_name().upper()}")
     logger.info(f"Lowercase Name: {fake.first_name().lower()} {fake.last_name().lower()}")
 
+    # Logging various email formats
+    logger.info(f"Email with subdomain: user@sub.{fake.domain_name()}")
+    logger.info(f"Gmail with plus sign: {fake.user_name()}+promo@gmail.com")
+    logger.info(f"Non-standard email format: {fake.user_name()}_{fake.random_int(100, 999)}@{fake.domain_name()}")
+    logger.info(f"Email with numeric domain: {fake.user_name()}@mail.123.com")
+    logger.info(f"Email with unusual TLD: {fake.user_name()}@example.xyz")
+
     cur.close()
     conn.close()
 
