@@ -88,6 +88,16 @@ def log_person_data():
         f"Medical record processed for patient {fake.first_name()} {fake.last_name()}, DOB: {fake.date_of_birth()}.")
     logger.info(f"Shipping details updated for {fake.first_name()} {fake.last_name()} at {fake.address()}.")
 
+    # Additional test cases for log filtering
+    logger.info(f"DEBUG: Processing payment for 1234-5678-9876-5432, user email: {fake.email()}.")
+    logger.info(
+        f"User feedback: 'I, {fake.first_name()} {fake.last_name()}, had an issue with my account {fake.email()}.'")
+
+    response_data = {"user": {"name": fake.name(), "ssn": fake.ssn(), "email": fake.email()}}
+    logger.info(f"API response: {response_data}")
+
+    logger.info(f"Multi-line log test:\nUser: {fake.name()}\nEmail: {fake.email()}\nPhone: {fake.phone_number()}")
+
     cur.close()
     conn.close()
 
