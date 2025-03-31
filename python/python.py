@@ -98,6 +98,10 @@ def log_person_data():
 
     logger.info(f"Multi-line log test:\nUser: {fake.name()}\nEmail: {fake.email()}\nPhone: {fake.phone_number()}")
 
+    # Logging names in different cases
+    logger.info(f"Uppercase Name: {fake.first_name().upper()} {fake.last_name().upper()}")
+    logger.info(f"Lowercase Name: {fake.first_name().lower()} {fake.last_name().lower()}")
+
     cur.close()
     conn.close()
 
