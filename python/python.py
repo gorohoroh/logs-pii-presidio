@@ -109,6 +109,14 @@ def log_person_data():
     logger.info(f"Email with numeric domain: {fake.user_name()}@mail.123.com")
     logger.info(f"Email with unusual TLD: {fake.user_name()}@example.xyz")
 
+    # Logging various phone formats
+    logger.info(f"International format: +1-{fake.numerify(text='###-###-####')}")
+    logger.info(f"Local US format: ({fake.numerify(text='###')}) {fake.numerify(text='###-####')}")
+    logger.info(f"Israeli local format: 0{fake.numerify(text='5#-###-####')}")
+    logger.info(f"Israeli international format: +972-{fake.numerify(text='5#-###-####')}")
+    logger.info(f"UK format: +44 {fake.numerify(text='20 #### ####')}")
+    logger.info(f"German format: +49 {fake.numerify(text='### #######')}")
+
     cur.close()
     conn.close()
 
