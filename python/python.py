@@ -58,9 +58,36 @@ def log_person_data():
     cur = conn.cursor()
     cur.execute("SELECT first_name, last_name, email, phone, address, dob, ssn FROM persons;")
     persons = cur.fetchall()
-    for person in persons:
+    for person in persons[:5]:  # Logging only 5 for testing purposes
         log_message = f"Person Info: Name: {person[0]} {person[1]}, Email: {person[2]}, Phone: {person[3]}, Address: {person[4]}, DOB: {person[5]}, SSN: {person[6]}"
         logger.info(log_message)
+
+        # Logging individual fields
+        logger.info(f"Logging email only: {person[2]}")
+        logger.info(f"Logging phone only: {person[3]}")
+        logger.info(f"Logging address only: {person[4]}")
+
+        # Logging an object simulation
+        person_obj = {
+            "first_name": person[0],
+            "last_name": person[1],
+            "email": person[2],
+            "phone": person[3],
+            "address": person[4],
+            "dob": person[5],
+            "ssn": person[6]
+        }
+        logger.info(f"Logging full person object: {person_obj}")
+
+    # Logging random PII data not from database
+    logger.info(
+        f"Customer Support received a call from {fake.first_name()} {fake.last_name()} at {fake.phone_number()} regarding their order.")
+    logger.info(f"Suspicious login attempt detected for user {fake.email()} from IP 192.168.1.101.")
+    logger.info(f"New employee onboarded: {fake.first_name()} {fake.last_name()}, SSN: {fake.ssn()}.")
+    logger.info(
+        f"Medical record processed for patient {fake.first_name()} {fake.last_name()}, DOB: {fake.date_of_birth()}.")
+    logger.info(f"Shipping details updated for {fake.first_name()} {fake.last_name()} at {fake.address()}.")
+
     cur.close()
     conn.close()
 
